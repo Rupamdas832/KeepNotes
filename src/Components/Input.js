@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {v4} from "uuid"
+import {TiPinOutline, TiPin} from "react-icons/ti"
 
 function Input({setKeep}) {
     const [title, setTitle] = useState("")
@@ -22,12 +23,18 @@ function Input({setKeep}) {
         setColor("")
     }
     return (
-        <div style={{backgroundColor: `${color}`}}>
-            <input placeholder="Enter Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
-            <input placeholder="Enter desc" value={desc} onChange={(e) => setDesc(e.target.value)}/>
-            <input type="color" id="favcolor" name="favcolor" value="#e76f51" onChange={(e) => setColor(e.target.value)}/>
-            <button onClick={() => setIsPin(!isPin)}>Pin</button>
-            <button onClick={addBtn}>ADD</button>
+        <div className="inputSection">
+        <div className="inputCard" style={{backgroundColor: `${color}`}}>
+            <div className="inputTitle">
+                <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="inputField" style={{backgroundColor: `${color}`}}/>
+                <button onClick={() => setIsPin(!isPin)} className="btn">{isPin ? <TiPin/> : <TiPinOutline/>}</button>
+            </div>
+            <input placeholder="Type a note..." value={desc} onChange={(e) => setDesc(e.target.value)} className="inputField desc" style={{backgroundColor: `${color}`}}/>
+            <div className="inputActionBtns">
+                <input type="color" id="favcolor" name="favcolor" value="#e76f51" onChange={(e) => setColor(e.target.value)}/>
+                <button onClick={addBtn} className="btn">Done</button>
+            </div>
+        </div>       
         </div>
     )
 }
