@@ -25,7 +25,7 @@ function Input({setKeep}) {
         <div style={{backgroundColor: `${color}`}}>
             <input placeholder="Enter Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
             <input placeholder="Enter desc" value={desc} onChange={(e) => setDesc(e.target.value)}/>
-            <input type="color" id="favcolor" name="favcolor" value="#e63946" onChange={(e) => setColor(e.target.value)}/>
+            <input type="color" id="favcolor" name="favcolor" value="#e76f51" onChange={(e) => setColor(e.target.value)}/>
             <button onClick={() => setIsPin(!isPin)}>Pin</button>
             <button onClick={addBtn}>ADD</button>
         </div>

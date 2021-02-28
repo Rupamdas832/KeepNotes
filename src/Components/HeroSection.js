@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DisplayList from './DisplayList'
+import Header from './Header'
 import Input from './Input'
 
 function HeroSection() {
@@ -11,6 +12,7 @@ function HeroSection() {
     },[keep])
     return (
         <div>
+        <Header/>
             <Input setKeep={setKeep}/>
             <DisplayList keepList={keepList} setKeepList={setKeepList}/>
         </div>
