@@ -23,7 +23,8 @@ function DisplayList({keepList, setKeepList}) {
                 {pinList && pinList.map((keep, index) => {
                     return <div key={index} style={{backgroundColor: `${keep.color}`}} className="keep pin">
                         <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
-                        <p>{keep.desc}</p>
+                        <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}}>{keep.desc}</h3>
+                        {keep.bookMark && <div className="bookmarkDisplay"><h3>{keep.bookMark}</h3></div>}
                         <div className="actionBtns">
                         <button onClick={() => delBtn(keep.id)} className="btn"><FaTrashAlt/></button>
                         </div>
@@ -35,7 +36,8 @@ function DisplayList({keepList, setKeepList}) {
                 {genList && genList.map((keep, index) => {
                     return <div key={index} style={{backgroundColor: `${keep.color}`}} className="keep">
                         <h1>{keep.title}</h1>
-                        <p>{keep.desc}</p>
+                        <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}}>{keep.desc}</h3>
+                        {keep.bookMark && <div className="bookmarkDisplay"><h3>{keep.bookMark}</h3></div>}
                         <div className="actionBtns">
                         <button onClick={() => delBtn(keep.id)} className="btn"><FaTrashAlt/></button>
                         </div>
