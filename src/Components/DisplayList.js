@@ -22,12 +22,11 @@ function DisplayList({keepList, setKeepList}) {
             <div className="pinKeeps">
                 {pinList && pinList.map((keep, index) => {
                     return <div key={index} style={{backgroundColor: `${keep.color}`}} className="keep pin">
-                        <h1>{keep.title}</h1>
+                        <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
                         <p>{keep.desc}</p>
                         <div className="actionBtns">
                         <button onClick={() => delBtn(keep.id)} className="btn"><FaTrashAlt/></button>
                         </div>
-                        
                     </div>
                 })}
             </div>
