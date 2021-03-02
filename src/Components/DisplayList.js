@@ -20,6 +20,7 @@ function DisplayList({keepList, setKeepList}) {
     const delBtn = (id) => {
         setKeepList(keepList.filter(item => item.id !== id))
     }
+    
     const saveChanges = (id) => {
         const foundId = keepList.findIndex((item) => item.id === id)
         console.log(keepList[foundId])
@@ -56,7 +57,7 @@ function DisplayList({keepList, setKeepList}) {
                             <div>
                             <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
                             <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
-                            {keep.bookMark && <div className="bookmarkDisplay"><h3>{keep.bookMark}</h3></div>}
+                            {keep.selectedBookMark && <div className="bookmarkDisplay"><h3>{keep.selectedBookMark}</h3></div>}
                             </div>
                         )}
                         
@@ -82,7 +83,7 @@ function DisplayList({keepList, setKeepList}) {
                         <div>
                         <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
                         <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
-                        {keep.bookMark && <div className="bookmarkDisplay"><h3>{keep.bookMark}</h3></div>}
+                        {keep.selectedBookMark && <div className="bookmarkDisplay"><h3>{keep.selectedBookMark}</h3></div>}
                         </div>
                     )}
                     

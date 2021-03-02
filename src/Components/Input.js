@@ -4,19 +4,20 @@ import Modal from "react-modal"
 import {FcBookmark} from "react-icons/fc"
 import {TiPinOutline, TiPin} from "react-icons/ti"
 import {VscBookmark} from "react-icons/vsc"
+import {FiDelete, FiPlusCircle} from "react-icons/fi"
 
-function Input({setKeep}) {
 
-    const bookmarkArray = [
-        "Home", "Assignment", "Work"
-    ]
+function Input({setKeep,bookMarkList, setBookMarkList}) {
+
+    
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
     const [isPin, setIsPin] = useState(false)
     const [color, setColor] = useState("")
-    const [bookMark, setBookMark] = useState("")
+    const [selectedBookMark, setSelectedBookMark] = useState("")
     const [modalIsOpen, setModalIsOpen] = useState(false)
-    const [bookMarkList, setBookMarkList] = useState(bookmarkArray)
+    const [isAddBookMark, setIsAddBookMark] = useState(false)
+    const [bookMark, setBookMark] = useState("")
 
     const customStyles = {
         content : {
@@ -26,31 +27,43 @@ function Input({setKeep}) {
           bottom                : 'auto',
           marginRight           : '-50%',
           padding               : '2rem',
-          backgroundColor       : 'rgb(230, 227, 227)',
+          backgroundColor       : 'rgb(209, 209, 209)',
           transform             : 'translate(-50%, -50%)'
         }
     };
 
     const addBookMark = (item) => {
-        setBookMark(item);
+        setSelectedBookMark(item);
         setModalIsOpen(false);
     }
 
     const addBtn = () => {
+        if(title === "" || desc === ""){
+            return alert("Please! Enter valid inputs")
+        }
         const item = {
             id: v4(),
             title: title,
             desc: desc,
             isPin: isPin,
             color: color,
-            bookMark: bookMark
+            selectedBookMark: selectedBookMark
         }
         setKeep(item)
         setTitle("")
         setDesc("")
         setIsPin("")
         setColor("")
+        setSelectedBookMark("")
+    }
+
+    const addBookMarkItem = () => {
+        if(bookMark === ""){
+            return alert("Please! Enter valid bookmark")
+        }
+        setBookMarkList([...bookMarkList, bookMark])
         setBookMark("")
+        setIsAddBookMark(false)
     }
     
     return (
@@ -64,21 +77,38 @@ function Input({setKeep}) {
             <div className="inputActionBtns">
                 <div>
                     <input type="color" id="favcolor" name="favcolor" value="#e76f51" onChange={(e) => setColor(e.target.value)}/>
-                   <button className="btn" style={{fontSize: "1.3rem", marginLeft: "1rem"}} onClick={() => setModalIsOpen(true)}>{bookMark ? <FcBookmark/> : <VscBookmark/>}</button>
+                   <button className="btn" style={{fontSize: "1.3rem", marginLeft: "1rem"}} onClick={() => setModalIsOpen(true)}>{selectedBookMark ? <FcBookmark/> : <VscBookmark/>}</button>
                     <Modal isOpen={modalIsOpen}  style={customStyles}>
                     <h1>Bookmarks</h1>
                     <ul>
                         {bookMarkList.map((item,index) => {
-                            return <li key={index} onClick={() => addBookMark(item)} style={{cursor: "pointer"}}>{item}</li>
+                            return <li  className="bookMark">
+                            <h4 key={index} onClick={() => addBookMark(item)} style={{cursor: "pointer"}}>{item}</h4>
+                            <button className="btn" style={{color: "red"}} onClick={() => setBookMarkList(bookMarkList.filter(bookmark => bookmark !== item))}><FiDelete/></button>
+                            </li>    
                         })}
-                        <li onClick={() => {
+                        <li>
+                        <h4 onClick={() => {
                             return (
-                                setBookMark(""), 
+                                setSelectedBookMark(""), 
                                 setModalIsOpen(false))}
                             } style={{cursor: "pointer"}}>
                             None
+                        </h4>
                         </li>
                     </ul>
+                    {isAddBookMark && 
+                        <div>
+                        <input className="inputField" placeholder="Enter bookmark" onChange={(e) => setBookMark(e.target.value)}/>
+                        <div className="bookMarkBtns"> 
+                            <button onClick={addBookMarkItem} className="btn" style={{fontSize: "1.5rem"}}><FiPlusCircle/></button>
+                        </div>
+                        </div>
+                    }
+                    <div className="bookMarkBtns">
+                        <button onClick={() => setIsAddBookMark(true)} className="btn">More</button>
+                        <button onClick={() => {return (setModalIsOpen(false), setIsAddBookMark(false))}} className="btn">Cancel</button>
+                    </div>
                     </Modal>
                 </div>
                 <button onClick={addBtn} className="btn">Done</button>
