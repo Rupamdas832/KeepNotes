@@ -15,6 +15,7 @@ function DisplayList({keepList, setKeepList}) {
         setPinList(_pinList)
         setGenList(_genList)
     },[keepList])
+    console.log(pinList,genList)
 
     const delBtn = (id) => {
         setKeepList(keepList.filter(item => item.id !== id))
@@ -34,6 +35,12 @@ function DisplayList({keepList, setKeepList}) {
             alert("Please click valid note")
         }
     }
+
+    const initEdit = (keep) => {
+        setKeepToChange(keep.id) 
+        setEditTitle(keep.title) 
+        setEditDesc(keep.desc)
+    }
     return (
         <div className="keepList">
         <h1 className="subHeading">Pinned Notes</h1>
@@ -48,19 +55,14 @@ function DisplayList({keepList, setKeepList}) {
                         ) : (
                             <div>
                             <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
-                            <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}}>{keep.desc}</h3>
+                            <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
                             {keep.bookMark && <div className="bookmarkDisplay"><h3>{keep.bookMark}</h3></div>}
                             </div>
                         )}
                         
                         <div className="actionBtns">
                         {keepToChange === keep.id ? (<button className="btn" style={{marginRight: "1rem"}} onClick={() => saveChanges(keep.id)}>Done</button>) : (
-                            <button className="btn" style={{marginRight: "1rem"}} onClick={() =>{return (
-                                setKeepToChange(keep.id), 
-                                setEditTitle(keep.title), 
-                                setEditDesc(keep.desc))
-                                }}><FaEdit/>
-                            </button>
+                            <button className="btn" style={{marginRight: "1rem"}} onClick={() => initEdit(keep)}><FaEdit/></button>
                             )}
                         <button onClick={() => delBtn(keep.id)} className="btn"><FaTrashAlt/></button>
                         </div>
@@ -71,10 +73,23 @@ function DisplayList({keepList, setKeepList}) {
             <div className="genKeeps">
                 {genList && genList.map((keep, index) => {
                     return <div key={index} style={{backgroundColor: `${keep.color}`}} className="keep">
-                        <h1>{keep.title}</h1>
-                        <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}}>{keep.desc}</h3>
+                    {keepToChange === keep.id ? (
+                        <div>
+                            <input value={editTitle} className="inputField" style={{backgroundColor: `${keep.color}`, borderBottom: "1px solid black"}} onChange={(e) => setEditTitle(e.target.value)}/>
+                            <input value={editDesc} className="inputField desc" style={{backgroundColor: `${keep.color}`}} onChange={(e) => setEditDesc(e.target.value)}/>
+                        </div>
+                    ) : (
+                        <div>
+                        <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
+                        <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
                         {keep.bookMark && <div className="bookmarkDisplay"><h3>{keep.bookMark}</h3></div>}
-                        <div className="actionBtns">
+                        </div>
+                    )}
+                    
+                    <div className="actionBtns">
+                    {keepToChange === keep.id ? (<button className="btn" style={{marginRight: "1rem"}} onClick={() => saveChanges(keep.id)}>Done</button>) : (
+                        <button className="btn" style={{marginRight: "1rem"}} onClick={() => initEdit(keep)}><FaEdit/></button>
+                        )}
                         <button onClick={() => delBtn(keep.id)} className="btn"><FaTrashAlt/></button>
                         </div>
                         

@@ -2,6 +2,7 @@
     margin: 0px;
     padding: 0px;
 }
+
 .header{
     width: 100vw;
     color: rgb(105, 218, 0);
@@ -91,7 +92,7 @@
     transform: rotate(-1deg);
     position: relative;
 }
-.keep p::first-letter{
+.keepDesc::first-letter{
     text-transform: uppercase;
 }
 .keep.pin{
