@@ -110,6 +110,9 @@
     transform: rotate(-1deg);
     position: relative;
 }
+.descDisplay{
+    padding: 1rem 0 1.5rem;
+}
 .keepDesc::first-letter{
     text-transform: uppercase;
 }
@@ -155,6 +158,12 @@
     }
     .keep h1{
         font-size: 1rem;
+    }
+    .descDisplay{
+        padding: 1rem 0 2rem;
+    }
+    .actionBtns{
+        bottom: 0px;
     }
 }
 

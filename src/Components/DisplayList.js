@@ -56,7 +56,9 @@ function DisplayList({keepList, setKeepList}) {
                         ) : (
                             <div>
                             <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
-                            <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
+                            <div className="descDisplay">
+                                <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
+                            </div>
                             {keep.selectedBookMark && <div className="bookmarkDisplay"><h3>{keep.selectedBookMark}</h3></div>}
                             </div>
                         )}
@@ -82,7 +84,9 @@ function DisplayList({keepList, setKeepList}) {
                     ) : (
                         <div>
                         <h1 style={{textTransform: "uppercase"}}>{keep.title}</h1>
-                        <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
+                        <div className="descDisplay">
+                                <h3 style={{color: "rgb(54, 54, 54)", fontWeight: "normal"}} className="keepDesc">{keep.desc}</h3>
+                        </div>
                         {keep.selectedBookMark && <div className="bookmarkDisplay"><h3>{keep.selectedBookMark}</h3></div>}
                         </div>
                     )}
